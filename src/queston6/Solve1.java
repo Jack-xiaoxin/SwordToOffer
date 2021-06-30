@@ -1,6 +1,6 @@
 package queston6;
 
-public class Solve {
+public class Solve1 {
     public static void main(String[] args) {
         System.out.println("解法1的结果：" + solve1(5));
         System.out.println("解法2的结果：" + solve2(5));
@@ -14,7 +14,7 @@ public class Solve {
         return solve1(n-1) + solve1(n-2);
     }
 
-    //解法2：
+    //解法2：较优
     public static int solve2(int n) {
         int p1 = 0, p2 = 1, p3 = 1;
         if(n <= 0) return p1;
