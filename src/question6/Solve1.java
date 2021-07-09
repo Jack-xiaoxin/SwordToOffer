@@ -1,4 +1,4 @@
-package queston6;
+package question6;
 
 public class Solve1 {
     public static void main(String[] args) {

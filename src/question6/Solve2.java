@@ -1,6 +1,6 @@
-package queston6;
+package question6;
 
-public class Solve3 {
+public class Solve2 {
 
     public static void main(String[] args) {
         System.out.println(solve(4));
@@ -11,7 +11,7 @@ public class Solve3 {
         if(n == 2) return 2;
         int p1 = 1, p2 = 2, p3 = 0;
         for(int i = 3; i <= n; i++) {
-            p3 = p2 + p1;
+            p3 = p1 + p2;
             p1 = p2;
             p2 = p3;
         }
