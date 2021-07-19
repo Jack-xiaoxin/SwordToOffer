@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Solve {
 
-    //思路：遍历二叉树
+    //思路：遍历二叉树。进入该节点时，将节点加入列表，退出时记得将节点删除
     //注意：target可能为负数。
     public List<List<Integer>> pathSum(TreeNode root, int target) {
         List<List<Integer>> result = new ArrayList<>();
