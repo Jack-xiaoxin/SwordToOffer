@@ -1,60 +1,45 @@
-package Question31;
+package question32;
 
+import apple.laf.JRSUIUtils;
 import com.sun.source.tree.Tree;
+import com.sun.tools.javac.util.List;
 
-import java.io.Serializable;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class Solve {
 
-    public static String preSeq = "";
+    private String seq = "";
 
-    public static void main(String[] args) {
-        TreeNode node1 = new TreeNode(1);
-        TreeNode node2 = new TreeNode(2);
-        TreeNode node3 = new TreeNode(3);
-        TreeNode node4 = new TreeNode(4);
-        TreeNode node5 = new TreeNode(5);
-        node1.left = node2;
-        node1.right = node3;
-        node3.left = node4;
-        node3.right = node5;
-
-        Serialize(node1);
-        System.out.println(preSeq);
-        TreeNode root = Deserialize(preSeq);
-        System.out.println("123");
-    }
-
-    public static String Serialize(TreeNode root) {
+    //前序遍历进行序列化
+    public String serialize(TreeNode root) {
         if(root != null) {
-            preSeq += "" + root.value + ",";
-            Serialize(root.left);
-            Serialize(root.right);
+            seq += "" + root.value + ",";
+            serialize(root.left);
+            serialize(root.right);
         } else {
-            preSeq += "$,";
+            seq += "$,";
         }
-        return preSeq;
+        return seq;
     }
 
-    public static TreeNode Deserialize(String data) {
-        if(data == null || data.length() == 0) return null;
+    //前序遍历进行反序列化
+    public TreeNode deserialize(String data) {
+        if (data == null) return null;
         Queue<String> queue = new LinkedList<>();
-        for(String str : data.split(","))
-            queue.offer(str);
-        return help(queue);
+        queue.addAll(Arrays.asList(data.split(",")));
+        return recur(queue);
     }
 
-    public static TreeNode help(Queue<String> queue) {
-        if(queue.isEmpty()) return null;
-        String str = queue.poll();
-        if(!str.equals("$")) {
-            int number = Integer.parseInt(str);
-            TreeNode root = new TreeNode(number);
-            root.left = help(queue);
-            root.right = help(queue);
-            return root;
+    public TreeNode recur(Queue<String> queue) {
+        if(queue == null || queue.size() == 0) return null;
+        String temp = queue.poll();
+        if(!temp.equals("$")) {
+            TreeNode node = new TreeNode(Integer.parseInt(temp));
+            node.left = recur(queue);
+            node.right = recur(queue);
+            return node;
         } else {
             return null;
         }
