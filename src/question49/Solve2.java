@@ -1,33 +1,21 @@
 package question49;
 
-import apple.laf.JRSUIUtils;
-
 public class Solve2 {
 
     private int count;
 
+    private int result;
+
     public int kthLargest(TreeNode root, int k) {
-        int count = getNum(root);
-        return getResult(root, count - k);
+        getResult(root, count - k);
+        return result;
     }
 
-    public int getResult(TreeNode root, int k) {
-        if(k <= 0) return 0;
-        if(root != null) {
-            int result = getResult(root.left, k);
-            k--;
-            if(k == 0) result += root.val;
-            result += getResult(root.right, k);
-            return result;
-        }
-        return 0;
-    }
-
-    public int getNum(TreeNode root) {
-        if(root != null) {
-            return 1 + getNum(root.left) + getNum(root.right);
-        }
-        return 0;
+    public void getResult(TreeNode root, int k) {
+        if(root.right != null && count < k) getResult(root.right, k);
+        count++;
+        if(count == k) result = root.val;
+        if(root.left != null && count < k) getResult(root.left, k);
     }
 }
 
