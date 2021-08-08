@@ -3,7 +3,8 @@ package leetcodeeveryday;
 public class Q0807 {
 
     public static void main(String[] args) {
-        new Q0807().circularArrayLoop(new int[]{-1, -2, -3, -4, -5});
+        boolean result = new Q0807().circularArrayLoop1(new int[]{1, 2, 3, 4, 5});
+        System.out.println(result);
     }
 
     public boolean circularArrayLoop(int[] nums) {
@@ -41,5 +42,35 @@ public class Q0807 {
             }
         }
         return false;
+    }
+
+    public boolean circularArrayLoop1(int[] nums) {
+        for(int i = 0; i < nums.length; i++) {
+            if(nums[i] == 0) continue;
+            int flag = nums[i] > 0 ? 1 : -1;
+            int slow = i, fast = next(nums, i);
+            while(nums[slow] * flag > 0 && nums[fast] * flag > 0) {
+                if(slow == fast) {
+                    if(slow != next(nums, slow)) return true;
+                    else break;
+                }
+                slow = next(nums, slow);
+                fast = next(nums, fast);
+                if(nums[fast] * flag > 0) fast = next(nums, fast);
+                else break;
+            }
+            slow = i;
+            while(nums[slow] * flag > 0) {
+                int temp = slow;
+                slow = next(nums, slow);
+                nums[temp] = 0;
+            }
+        }
+        return false;
+    }
+
+    public int next(int[] nums, int cur) {
+        int n = nums.length;
+        return ((cur + nums[cur]) % n + n) % n;
     }
 }
