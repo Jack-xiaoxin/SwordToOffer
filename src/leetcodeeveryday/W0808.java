@@ -76,6 +76,7 @@ public class W0808 {
         return (cnt+1) >> 1;
     }
 
+    //这题有点意思
     public int[] longestObstacleCourseAtEachPosition(int[] obstacles) {
         int[] result = new int[obstacles.length];
         int[] stack = new int[obstacles.length];
