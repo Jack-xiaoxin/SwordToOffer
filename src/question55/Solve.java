@@ -8,6 +8,7 @@ public class Solve {
         System.out.println(Arrays.toString(new Solve().dicesProbability(2)));
     }
 
+    //方案1：递归
     public double[] dicesProbability(int n) {
         int[] nums = new int[6 * n + 1];
         help(1, 0, nums, n);
