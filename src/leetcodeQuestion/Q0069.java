@@ -2,8 +2,6 @@ package leetcodeQuestion;
 
 public class Q0069 {
 
-
-
     public int mySqrt(int x) {
         int i = 0;
         while(i * i < x) i++;
